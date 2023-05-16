@@ -9,10 +9,13 @@ Wire.begin();
 Just use WireZ instead of Wire
 and WireZ.h instead of Wire.h
 
-Benefits: 
+# Benefits: 
 * up to 255 bytes max transfer length with user-specified buffer 
 * memory usage reduced to user buffer size + 2x32 default built-in buffers (can be reduced to 2x4)
 * no additional memory copy operations
+
+
+# Usage
 
 Zero Copy mode is managed via 
 void setUserBuffer(uint8_t*, uint8_t, bool twi_zero_copy = false);
@@ -21,3 +24,7 @@ e.g.
 Wire.begin();
 WireZ.setUserBuffer(&user_bufer, sizeof(user_bufer), true);
 
+# Limitations
+
+* no read/write is possible during transaction.
+* you should not modify or access buffer with Wirwe.read/write methods until transaction is finished (e.g. from ISR)
